@@ -1,5 +1,5 @@
 import { Image, useScroll, Text } from '@react-three/drei'
-import { useRef, useState, useLayoutEffect } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 import gsap from 'gsap'
@@ -18,19 +18,21 @@ export default function SpiralGallery() {
 
   // Configuration
   const radius = 2 // Reduced radius
-  const verticalGap = 0.35 // Reduced gap further
+  const verticalGap = 0.3 // Reduced gap further
 
   useFrame((state, delta) => {
     if (!groupRef.current) return
     
     // Scroll offset (0 to 1)
-    const offset = scroll.offset
+    const offset = scroll?.offset || 0
     
     // Calculate target rotation and Y position
     // Invert rotation direction as requested
-    const targetRotation = -offset * Math.PI * 2 
+    // Speed up rotation significantly (4 full rotations over the scroll length)
+    const targetRotation = -offset * Math.PI * 8 
     const totalHeight = images.length * verticalGap
-    const targetY = offset * totalHeight
+    // Speed up vertical movement (3x faster) to finish before HTML content
+    const targetY = offset * totalHeight * 3
 
     // Apply directly (ScrollControls handles damping)
     groupRef.current.rotation.y = targetRotation
@@ -105,7 +107,7 @@ function Card({ url, title, position, rotation, index, radius }) {
   })
 
   // Use useEffect to trigger GSAP animations when hover state changes
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (!imageRef.current) return
 
     const targetScale = hovered ? 1.2 : 1
@@ -148,6 +150,10 @@ function Card({ url, title, position, rotation, index, radius }) {
           User provided: [0.1, 1.25, 1, 20, 20]
         */}
         <bentPlaneGeometry args={[0.1, 1.25, 1, 20, 20]} />
+        {/* 
+          Using standard plane geometry for debugging
+        */}
+        {/* <planeGeometry args={[1.25, 1, 20, 20]} /> */}
       </Image>
       
       <Text

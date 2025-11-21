@@ -12,12 +12,7 @@ html, body, #root {
   background: #000000;
   color: #ffffff;
   font-family: 'Inter', sans-serif;
-  overflow: hidden; /* We will use ScrollControls for scrolling later, but for now allow if needed, though prompt said hide default scrollbar but allow scrolling. 
-  Actually, ScrollControls from drei usually handles its own scrolling container. 
-  The prompt said: "Hide the default browser scrollbar but allow scrolling."
-  So overflow: auto or scroll but with hidden bars.
-  */
-  overflow: auto;
+  overflow: hidden; /* Hide scrollbars, ScrollControls handles it */
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
