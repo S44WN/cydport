@@ -69,10 +69,10 @@ const FluidMaterial = shaderMaterial(
 
     void main() {
       vUv = uv;
-      float noise = snoise(position * 1.5 + uTime * 0.2);
+      float noise = snoise(position * 0.8 + uTime * 0.2);
       vDisplacement = noise;
       // Displace vertices along normal
-      vec3 newPos = position + normal * noise * 0.4;
+      vec3 newPos = position + normal * noise * 0.08;
       gl_Position = projectionMatrix * modelViewMatrix * vec4(newPos, 1.0);
     }
   `,
@@ -117,7 +117,7 @@ export default function FluidBlob() {
   })
 
   return (
-    <mesh ref={meshRef} scale={[1, 1, 1]}>
+    <mesh ref={meshRef} scale={[1.2, 1.2, 1.2]}>
       <sphereGeometry args={[1, 64, 64]} />
       <fluidMaterial ref={materialRef} />
     </mesh>

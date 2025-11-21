@@ -62,7 +62,7 @@ export default function SpiralGallery() {
         // Let's try rotation Y = theta + PI (facing center) or theta (facing out).
         // User code had: Math.PI + (i / count) * Math.PI * 2. This is facing center.
         
-        const rotationY = theta + Math.PI
+        const rotationY = theta 
 
         return (
           <Card 
@@ -127,7 +127,7 @@ function Card({ url, title, position, rotation, index, radius }) {
         duration: 0.3
       })
       gsap.to(textRef.current.position, {
-        y: hovered ? 0.8 : 0.6, // Move text up slightly
+        y: hovered ? 0.5 : 0.4, // Move text up slightly
         duration: 0.3
       })
     }
@@ -149,7 +149,7 @@ function Card({ url, title, position, rotation, index, radius }) {
           Args: [radius, width, height, widthSegments, heightSegments]
           User provided: [0.1, 1.25, 1, 20, 20]
         */}
-        <bentPlaneGeometry args={[0.1, 1.25, 1, 20, 20]} />
+        <bentPlaneGeometry args={[0.1, 1, 0.8, 20, 20]} />
         {/* 
           Using standard plane geometry for debugging
         */}
@@ -158,10 +158,10 @@ function Card({ url, title, position, rotation, index, radius }) {
       
       <Text
         ref={textRef}
-        position={[0, 0.6, 0]} // Position relative to the card
-        fontSize={0.15}
+        position={[-0.5, 0.4, 0]} // Position relative to the card (left aligned)
+        fontSize={0.1}
         color="white"
-        anchorX="center"
+        anchorX="left"
         anchorY="middle"
         opacity={0} // Start hidden
       >
