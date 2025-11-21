@@ -40,7 +40,7 @@ export default function Interface() {
       </section>
 
       {/* Spacer to push content down after gallery scroll */}
-      <div style={{ height: '200vh' }} />
+      <div style={{ height: '100vh' }} />
 
       {/* Content Container */}
       <div style={{ 
