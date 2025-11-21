@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import { useFrame, extend } from '@react-three/fiber'
-import { shaderMaterial } from '@react-three/drei'
+import { shaderMaterial, useScroll } from '@react-three/drei'
 import * as THREE from 'three'
 
 const FluidMaterial = shaderMaterial(
@@ -100,15 +100,24 @@ extend({ FluidMaterial })
 
 export default function FluidBlob() {
   const materialRef = useRef()
+  const meshRef = useRef()
+  const scroll = useScroll()
 
   useFrame(({ clock }) => {
     if (materialRef.current) {
       materialRef.current.uTime = clock.getElapsedTime()
     }
+    if (meshRef.current && scroll) {
+      // Rotate based on scroll offset
+      // scroll.offset is 0 to 1
+      const rotation = scroll.offset * Math.PI * 2
+      meshRef.current.rotation.y = rotation
+      meshRef.current.rotation.z = rotation * 0.5
+    }
   })
 
   return (
-    <mesh scale={[1, 1, 1]}>
+    <mesh ref={meshRef} scale={[1, 1, 1]}>
       <sphereGeometry args={[1, 64, 64]} />
       <fluidMaterial ref={materialRef} />
     </mesh>
