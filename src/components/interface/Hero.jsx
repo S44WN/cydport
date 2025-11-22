@@ -1,6 +1,32 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
+import gsap from 'gsap'
 
 export default function Hero() {
+  const titleRefs = useRef([])
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.fromTo(titleRefs.current, 
+        { y: '100%', rotate: 5 },
+        { 
+          y: 0, 
+          rotate: 0,
+          duration: 2.5, 
+          ease: 'power4.out', 
+          stagger: 0.2,
+          delay: 0.5 // Wait for loader
+        }
+      )
+    })
+    return () => ctx.revert()
+  }, [])
+
+  const addToRefs = (el) => {
+    if (el && !titleRefs.current.includes(el)) {
+      titleRefs.current.push(el)
+    }
+  }
+
   return (
     <section style={{ 
       height: '100vh', 
@@ -32,9 +58,15 @@ export default function Hero() {
         position: 'relative',
         zIndex: 10
       }}>
-        creative <br />
-        web <br />
-        developer
+        <div style={{ overflow: 'hidden' }}>
+          <div ref={addToRefs}>creative</div>
+        </div>
+        <div style={{ overflow: 'hidden' }}>
+          <div ref={addToRefs}>web</div>
+        </div>
+        <div style={{ overflow: 'hidden' }}>
+          <div ref={addToRefs}>developer</div>
+        </div>
       </h1>
       
       <div style={{
