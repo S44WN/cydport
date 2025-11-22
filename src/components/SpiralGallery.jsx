@@ -43,7 +43,7 @@ export default function SpiralGallery() {
     <group ref={groupRef}>
       {images.map((img, i) => {
         // Spiral positioning
-        const anglePerImage = 0.8 // Increased for more horizontal gap
+        const anglePerImage = 0.7 // Increased for more horizontal gap
         const theta = i * anglePerImage
         
         const x = radius * Math.sin(theta)
