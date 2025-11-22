@@ -149,7 +149,7 @@ function Card({ url, title, position, rotation, index, radius }) {
           Args: [radius, width, height, widthSegments, heightSegments]
           User provided: [0.1, 1.25, 1, 20, 20]
         */}
-        <bentPlaneGeometry args={[0.1, 1, 0.8, 20, 20]} />
+        <bentPlaneGeometry args={[-0.1, 1, 0.8, 20, 20]} />
         {/* 
           Using standard plane geometry for debugging
         */}

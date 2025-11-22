@@ -8,15 +8,20 @@ class BentPlaneGeometry extends THREE.PlaneGeometry {
     super(...args);
     let p = this.parameters;
     let hw = p.width * 0.5;
+    
+    // Use absolute radius for calculation to ensure valid circle geometry
+    let absRadius = Math.abs(radius);
+    let sign = Math.sign(radius);
+    
     let a = new THREE.Vector2(-hw, 0);
-    let b = new THREE.Vector2(0, radius);
+    let b = new THREE.Vector2(0, absRadius);
     let c = new THREE.Vector2(hw, 0);
     let ab = new THREE.Vector2().subVectors(a, b);
     let bc = new THREE.Vector2().subVectors(b, c);
     let ac = new THREE.Vector2().subVectors(a, c);
     let r =
       (ab.length() * bc.length() * ac.length()) / (2 * Math.abs(ab.cross(ac)));
-    let center = new THREE.Vector2(0, radius - r);
+    let center = new THREE.Vector2(0, absRadius - r);
     let baseV = new THREE.Vector2().subVectors(a, center);
     let baseAngle = baseV.angle() - Math.PI * 0.5;
     let arc = baseAngle * 2;
@@ -27,7 +32,8 @@ class BentPlaneGeometry extends THREE.PlaneGeometry {
       let uvRatio = uv.getX(i);
       let y = pos.getY(i);
       mainV.copy(c).rotateAround(center, arc * uvRatio);
-      pos.setXYZ(i, mainV.x, y, -mainV.y);
+      // Apply sign to invert curvature if radius is negative
+      pos.setXYZ(i, mainV.x, y, -mainV.y * sign);
     }
     pos.needsUpdate = true;
     this.computeVertexNormals();
