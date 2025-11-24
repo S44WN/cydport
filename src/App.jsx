@@ -17,7 +17,7 @@ export default function App() {
       >
         <color attach="background" args={['#000000']} />
         <Suspense fallback={null}>
-          <ScrollControls pages={4.2} damping={0.2}>
+          <ScrollControls pages={4.5} damping={0.2}>
             <FluidBlob />
             <SpiralGallery />
             <Interface />

@@ -2,41 +2,50 @@ import React from 'react'
 
 export default function Footer() {
   return (
-    <section style={{ 
-      padding: '5vh 5vw 10vh 5vw', // Added bottom padding
+    <footer style={{ 
+      // backgroundColor: '#E6E6E6', // Removed to match page background (black)
+      padding: '2rem 2rem 0 2rem',
       display: 'flex',
-      alignItems: 'flex-end',
-      justifyContent: 'space-between',
-      // marginTop: 'auto' // Removed as it might not be needed in this flex column
+      flexDirection: 'column',
+      color: '#ffffff', // White text
     }}>
-      {/* Social Icons (Left) */}
-      <div style={{ display: 'flex', gap: '1rem', mixBlendMode: 'difference', color: '#ffffff' }}>
-        {/* Simple text placeholders for icons as requested */}
-        <span style={{ fontSize: '1.5rem', cursor: 'pointer' }}>◈</span>
-        <span style={{ fontSize: '1.5rem', cursor: 'pointer' }}>🐦</span>
-        <span style={{ fontSize: '1.5rem', cursor: 'pointer' }}>🐙</span>
-        <span style={{ fontSize: '1.5rem', cursor: 'pointer' }}>💼</span>
-        <span style={{ fontSize: '1.5rem', cursor: 'pointer' }}>📷</span>
+      {/* Top Bar with Border */}
+      <div style={{ 
+        borderTop: '1px solid #ffffff', // White border
+        paddingTop: '0.5rem',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'flex-start',
+        fontFamily: "'Playfair Display', serif",
+        fontSize: '1rem',
+        fontWeight: 'bold'
+      }}>
+        {/* Left: Copyright */}
+        <div>
+          © Saawn. All rights reserved.
+        </div>
+
+        {/* Right: Social Links */}
+        <div style={{ display: 'flex', gap: '2rem' }}>
+          <a href="#" style={{ color: 'inherit', textDecoration: 'none' }}>Instagram</a>
+          <a href="#" style={{ color: 'inherit', textDecoration: 'none' }}>LinkedIn</a>
+          <a href="#" style={{ color: 'inherit', textDecoration: 'none' }}>GitHub</a>
+        </div>
       </div>
 
-      {/* Copyright (Right) */}
-      <div style={{ textAlign: 'right', mixBlendMode: 'difference', color: '#ffffff' }}>
-        <div style={{ 
-          fontSize: '3rem', 
-          fontFamily: "'Playfair Display', serif",
-          marginBottom: '0.5rem'
-        }}>
-          © Saawn 2025
-        </div>
-        <div style={{ 
-          fontSize: '1rem', 
-          fontFamily: "'Inter', sans-serif",
-          letterSpacing: '0.1em',
-          textTransform: 'uppercase'
-        }}>
-          Creative Freelance Developer
-        </div>
+      {/* Large SVG Logo */}
+      <div style={{ marginTop: '2rem', width: '100%', lineHeight: 0 }}>
+        <img 
+          src="./saawn.svg" 
+          alt="Saawn" 
+          style={{ 
+            width: '100%', 
+            height: 'auto', 
+            display: 'block',
+            opacity: 0.2 // Subtle opacity for the large background logo feel
+          }} 
+        />
       </div>
-    </section>
+    </footer>
   )
 }
